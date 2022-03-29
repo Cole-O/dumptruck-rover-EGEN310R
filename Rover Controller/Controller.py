@@ -1,57 +1,25 @@
+import msvcrt
 import serial
-import keyboard
 
-
-def keyboardController(connection):
+def userInput(connection):
     while True:
-        # Forwards Slow: Move both tracks forward slow
-        if keyboard.is_pressed('w'):
-            connection.write('w')
-
-        # Forwards Fast: move both tracks forward faster
-        elif keyboard.is_pressed('W'):
-            connection.write('W')
-
-        # Slow Right Turn: right track forward slowly
-        elif keyboard.is_pressed('a'):
-            connection.write('a')
-
-        # Hard Right Turn: right track forward, left track backward
-        elif keyboard.is_pressed('A'):
-            connection.write('A')
-
-        # Backwards Slow: move both tracks backwards slow
-        elif keyboard.is_pressed('s'):
-            connection.write('s')
-
-        # Backwards Fast: move both tracks backwards fast
-        elif keyboard.is_pressed('S'):
-            connection.write('S')
-
-        # Slow Left Turn: move left track forward slow
-        elif keyboard.is_pressed('d'):
-            connection.write('d')
-
-        # Hard Left Turn: move left track forward and right track backward
-        elif keyboard.is_pressed('D'):
-            connection.write('D')
-
-        # Stop all motors
-        elif keyboard.is_pressed('g'):
-            connection.write('g')
-
-        elif keyboard.is_pressed('G'):
-            connection.write('G')
-
-        # Panic break loop
-        elif keyboard.is_pressed('space'):
-            break
-
-        # Slow rover down?
-        else:
-            pass
-
-
+        # Check if there is a char to get
+        if msvcrt.kbhit():
+            # Set cmd to the user's char input 
+            cmd = msvcrt.getwch()
+            #Panic break while loop on 'q'
+            if (cmd == 'q'):
+                break
+            # Send cmd to Arduino
+            else:
+                connection.write(cmd.encode())
+    
 if __name__ == "__main__":
+    # Connect to bluetooth via serial COM3 port
     bluetooth = serial.Serial(port='COM3', baudrate=9600)
-    keyboardController(bluetooth)
+
+    # Visual check to see if connection is opened
+    print(bluetooth.isOpen())
+
+    # Get user input
+    userInput(bluetooth)

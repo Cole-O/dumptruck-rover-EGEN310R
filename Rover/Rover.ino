@@ -16,21 +16,21 @@ if(Serial.available()){
   Serial.println(t);
 }
  
-if(t == 'w'){            //move forward(all motors rotate in forward direction)
+if(t == 'w' || t == 'W'){            //move forward(all motors rotate in forward direction)
   digitalWrite(13,HIGH);
   digitalWrite(11,HIGH);
 }
  
-else if(t == 's'){      //move reverse (all motors rotate in reverse direction)
+else if(t == 's' || t == 'S'){      //move reverse (all motors rotate in reverse direction)
   digitalWrite(12,HIGH);
   digitalWrite(10,HIGH);
 }
  
-else if(t == 'd'){      //turn right (left side motors rotate in forward direction, right side motors doesn't rotate)
+else if(t == 'd' || t == 'D'){      //turn right (left side motors rotate in forward direction, right side motors doesn't rotate)
   digitalWrite(11,HIGH);
 }
  
-else if(t == 'a'){      //turn left (right side motors rotate in forward direction, left side motors doesn't rotate)
+else if(t == 'a' || t == 'A'){      //turn left (right side motors rotate in forward direction, left side motors doesn't rotate)
   digitalWrite(13,HIGH);
 }
 
@@ -41,7 +41,7 @@ else if(t == 'L'){
   digitalWrite(9,LOW);
 }
  
-else if(t == 'g' || t == 'G'){      //STOP (all motors stop)
+else if(t == ' '){      //STOP (all motors stop)
   digitalWrite(13,LOW);
   digitalWrite(12,LOW);
   digitalWrite(11,LOW);
