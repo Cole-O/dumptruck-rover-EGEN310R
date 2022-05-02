@@ -2,14 +2,14 @@
 
 
 ## Overview
-This is the code repository for Group A6's dump truck rover controller.  The rover is primary controlled via bluetooth connection through a python controller. This controller dynamically takes keyboard inputs from the user and sends them to an arduino for processing.  In turn, the arduino has if statements to determine what should be done with the inputs given.  
+This is the code repository for Group A6's dump truck rover controller.  The rover is primary controlled via bluetooth connection through a python controller. This controller dynamically takes keyboard inputs from the user and sends them to an arduino for processing.  In turn, the arduino has logic statements to determine what should be done with the inputs given.  
 
 ## Control Scheme
 
-Controls are implemented such that by holding a key down results in constantly sending a signal for movement.  On release of said key results in stopping movement for the rover.
+Controls are implemented in way that makes sense for most game controls.  
 
 **Example:**
-Holding W results in the rover moving forward until the user releases the key, at which the rover promptly stops moving.
+Pressing W results in the rover moving forward until the user presses the space bar, at which the rover promptly stops moving.
 
 * W - Move Forward
 * A - Move Left
