@@ -13,7 +13,6 @@ Serial.begin(9600);
 
 //Servo Setup
 dumpServo.attach(9); //attach servo and tell what pin numbers it is on
-dumpServo.writeMicroseconds(1500);
 }
  
 void loop() {
@@ -23,31 +22,44 @@ if(Serial.available()){
   Serial.write('R');  //Testing latency Remove Later, could add before digitalWrites
 }
  
-if(t == 'w' || t == 'W'){            //move forward(all motors rotate in forward direction)
+if(t == 'w' || t == 'W'){            //Move forward(all motors rotate in forward direction)
   digitalWrite(13,HIGH);
   digitalWrite(11,HIGH);
 }
  
-else if(t == 's' || t == 'S'){      //move reverse (all motors rotate in reverse direction)
+else if(t == 's' || t == 'S'){      //Move reverse (all motors rotate in reverse direction)
   digitalWrite(12,HIGH);
   digitalWrite(10,HIGH);
 }
  
-else if(t == 'd' || t == 'D'){      //turn right (left side motors rotate in forward direction, right side motors doesn't rotate)
-  digitalWrite(11,HIGH);
+else if(t == 'd' || t == 'D'){ 
+  if (t == 'd'){
+    digitalWrite(11,HIGH);         //Turn right (left side motors rotate in forward direction, right side motors doesn't rotate)
+  }
+  else if(t == 'D'){               //Turn right (right side motors rotate forward, left side motors rotate backwards)
+    digitalWrite(11,HIGH);
+    digitalWrite(12,HIGH);
+  }
 }
  
-else if(t == 'a' || t == 'A'){      //turn left (right side motors rotate in forward direction, left side motors doesn't rotate)
-  digitalWrite(13,HIGH);
+else if(t == 'a' || t == 'A'){     //Turn left (right side motors rotate in forward direction, left side motors doesn't rotate)
+  if (t =='a'){
+    digitalWrite(13,HIGH);
+  }
+  else if (t == 'A'){              //Turn left (right side motors rotate in forward direction, left side motors rotate backwards)
+    digitalWrite(13,HIGH);
+    digitalWrite(10,HIGH);
+  }
 }
 
 else if(t == 'l'){
 //Dump bed down
-dumpServo.writeMicroseconds(1300);
+  dumpServo.writeMicroseconds(1300);
 }
+
 else if(t == 'L'){
 //Dump bed up
-dumpServo.writeMicroseconds(1700);
+  dumpServo.writeMicroseconds(2600);
 }
  
 else if(t == ' '){      //STOP (all motors and servo stop)
