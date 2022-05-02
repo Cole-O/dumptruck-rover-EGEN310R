@@ -27,13 +27,13 @@ def userInput(connection):
                     # Make sure dump bed moves up on the first cmd input
                     if (i == 0):
                         connection.write('L'.encode())
-                        # time.sleep(.60)
+                        time.sleep(.60)
                         connection.write(' '.encode())
                         prev = 'L'
                         
                     else:
                         connection.write(cmd.encode())
-                        # time.sleep(.60)
+                        time.sleep(.60)
                         connection.write(' '.encode())
                         prev = cmd
 
